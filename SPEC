@@ -1,0 +1,64 @@
+HEAVILY INFLUENCED / COPY-PASTED FROM
+http://gary.beagledreams.com/page/go-websocket-chat.html
+
+Use websockets to send and receive messages between peers and a server hub.
+We have a bunch of connections, and a hub.
+
+- hook up to the hub (add to a list of connections)
+- hook down from the hub (rm ~)
+- send json shit to hub
+- receive json shit from hub (which got it from other connections)
+
+what do we want to do. i am lost i think cause i donr see how we are supposed to TEST this
+
+like we got this websocket example, but if we change it how do we know what did makes sense?
+
+we can change the html as we go too. yeah ok.
+
+# Hub
+connections map[*connection]bool
+broadcast chan string
+register chan *connection
+unregister chan *connection
+
+# Connection
+ws *websocket.Conn
+send chan string
+
+# What client sends to server
+{ "event": "event name", "data": "ur data man" }
+
+# NodeJS
+conn = new WebSocket(network); // network some url
+conn.send(data);
+conn.onmessage = function(data) {};
+// and 2 or 3 more events like onmessage
+
+map these go concepts into either 1) plain english 2) other lingo you use
+
+One connection per websocket, and each connection has what channels?
+Ie: what different type of data does it process? We want to tell it to:
+
+so thats just what is in the send channel? json {"event_name": "foo"}? ok those 4 are fine, how do we spec them nicely - thats channels right, and 2 types so far connection and hub
+
+so we need propertieis of both and list them nicely (sort of what we have already)
+
+# NODEJS
+var rtc = {};
+rtc._events = {};
+var rooms = {};
+
+just writing down so we can make analogous things in go. 
+this is the server?
+
+ohkay, they changed it a bit
+
+## EVENTS
+
+.on
+.fire wtf is that
+
+## ROUTES
+serve /webrtc.io/webrtc.io.js (the client)
+
+## ROOMS

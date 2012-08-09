@@ -1,7 +1,8 @@
 <html>
 <head>
 <title>Chat Example</title>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript"
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript">
     $(function() {
 
@@ -25,7 +26,8 @@
         if (!msg.val()) {
             return false;
         }
-        conn.send(msg.val());
+        var data = { eventName: "event", data: msg.val() };
+        conn.send(data);
         msg.val("");
         return false
     });
