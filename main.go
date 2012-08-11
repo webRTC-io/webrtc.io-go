@@ -24,6 +24,17 @@ func resourceHandler(c http.ResponseWriter, req *http.Request) {
 
 func main() {
 	flag.Parse()
+	wsevents.Connect(func(c *wsevents.Connection) {
+
+		// wrap event with color before sending it
+		c.On("chat msg", func(msg interface{}) {
+			d := map[string]string{
+				"msg":   msg.(string),
+				"color": "#999",
+			}
+			c.Broadcast("chat msg", d)
+		})
+	})
 	go wsevents.Run()
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/resources/webrtc.io.js", resourceHandler)
